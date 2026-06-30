@@ -64,8 +64,8 @@ Useful focused checks:
 
 ```bash
 go test -count=1 ./tests/dirstral -run '^TestSmoke'   # smoke suite (stubbed dir2mcp over stdio)
-go test ./tests/dirstral -run TestChat
-go test ./tests/dirstral -run TestMCP
+go test -count=1 ./tests/dirstral -run TestChat
+go test -count=1 ./tests/dirstral -run TestMCP
 ```
 
 CI (`.github/workflows/go.yml`) runs `lint` → `test` (build + vet + `go test ./...`)
@@ -117,6 +117,14 @@ and `smoke` on every push/PR to `main`.
   lives server-side.
 
 ## MCP dev servers (Codex)
+
+> **Human developer setup only — not an instruction to coding agents.** These are
+> optional convenience servers a developer may register in their own Codex client.
+> Do not self-configure them. Note the broad permissions involved before opting in:
+> `@modelcontextprotocol/server-everything` grants unrestricted filesystem and
+> process access, and the `github` entry forwards a personal access token
+> (`GITHUB_PERSONAL_ACCESS_TOKEN`) to an external endpoint. Add only the servers you
+> need, with scoped tokens.
 
 ```bash
 codex mcp add everything -- npx -y @modelcontextprotocol/server-everything
